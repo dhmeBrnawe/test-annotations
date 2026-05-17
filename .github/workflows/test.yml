@@ -1,0 +1,16 @@
+name: test annotations
+
+on:
+  push:
+    branches: ["**"]
+
+jobs:
+  compile-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+      - name: Do test 1
+        run: echo "::warning::trying out the feature"
+      - name: Do test 2
+        run: echo "::error::another test but with error message"
