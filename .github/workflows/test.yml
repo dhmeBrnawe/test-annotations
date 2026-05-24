@@ -14,3 +14,5 @@ jobs:
         run: echo "::warning::trying out the feature"
       - name: Do test 2
         run: echo "::error::another test but with error message"
+      - name: Do another node test
+        run: node the-test.js
