@@ -1,0 +1,23 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+      - name: Create Bot's Access Token
+        id: bot-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        with:
+          client-id: ${{ vars.BOT_ID }}
+          private-key: ${{ secrets.BOT_KEY }}
+
+      - name: Draft a new release
+        run: gh release new v1.0.0 --title "v1.0.0 (draft)" --draft
+        env:
+          GH_TOKEN: ${{ steps.bot-token.outputs.token }}
